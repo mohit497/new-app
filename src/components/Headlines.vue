@@ -20,10 +20,8 @@ export default {
   },
   mounted() {
     this.$store.dispatch("getNewsData");
-    console.log(this.news[0]?.id, "all news");
   },
   computed: {
-    // mix the getters into computed with object spread operator
     ...mapGetters({
       news: "getAllNews",
     }),
