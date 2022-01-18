@@ -1,7 +1,4 @@
 <template>
-  <v-app-bar  dark color="blue" elevation="4">
-    <v-toolbar-title >News App</v-toolbar-title>
-  </v-app-bar>
   <v-container>
     <v-row class="text-center my-2">
       <v-col cols="3">
