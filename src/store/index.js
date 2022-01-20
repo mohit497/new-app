@@ -46,6 +46,10 @@ export default createStore({
     },
     getLoading:(state)=>{
       return state.loading
+    },
+    getNewsById:(state) => (id) => {
+      console.log(state.news.filter((a, index)=> index === Number(id)), id)
+      return state.news.filter((a, index)=> index === Number(id))
     }
   },
   modules: {},

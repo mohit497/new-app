@@ -2,8 +2,8 @@
 <template>
   <v-container>
     <v-row class="text-center my-2">
-      <v-col cols="3" v-for="item in news" :key="item.id">
-        <NewsCard :title="item.title" :description="item.description" :publishedAt="item.publishedAt" />
+      <v-col cols="3" v-for="(item, index) in news" :key="item.id">
+        <NewsCard :title="item.title" :description="item.description" :publishedAt="item.publishedAt" :id="index" />
       </v-col>
     </v-row>
   </v-container>
