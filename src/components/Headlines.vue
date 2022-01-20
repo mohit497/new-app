@@ -3,7 +3,7 @@
   <v-container>
     <v-row class="text-center my-2">
       <v-col cols="3" v-for="item in news" :key="item.id">
-        {{ item.id }}  <NewsCard />
+        <NewsCard :title="item.title" :description="item.description" :publishedAt="item.publishedAt" />
       </v-col>
     </v-row>
   </v-container>

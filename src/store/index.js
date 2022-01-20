@@ -18,8 +18,20 @@ export default createStore({
     getNewsData({ commit }) {
       commit("SET_LOADING", true);
       axios
-        .get(`${process.env.VUE_APP_API_ENDPOINT}${process.env.VUE_APP_API_KEY}`)
+        .get(`${process.env.VUE_APP_API_ENDPOINT}/top-headlines?country=us&apiKey=${process.env.VUE_APP_API_KEY}`)
         .then((response) => {
+          commit("SET_NEWS", response.data.articles);
+          commit("SET_LOADING", false);
+        }).catch((e)=>{
+          commit("SET_LOADING", false);
+          console.log(e)
+        })
+    },
+    getSources({ commit }) {
+      commit("SET_LOADING", true);
+      axios
+      .get(`${process.env.VUE_APP_API_ENDPOINT}/sources?apiKey=${process.env.VUE_APP_API_KEY}`)
+      .then((response) => {
           commit("SET_NEWS", response.data.sources);
           commit("SET_LOADING", false);
         }).catch((e)=>{
