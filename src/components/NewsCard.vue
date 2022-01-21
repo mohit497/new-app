@@ -34,7 +34,7 @@ export default {
   data() {
     return {
       shortDescription: this.description?.substring(0, 150),
-      shortTitle: this.title?.substring(0, 25),
+      shortTitle: this.title,
       publishedOn: moment(this.publishedAt).format("LLL"),
     };
   },
@@ -50,7 +50,9 @@ export default {
 <style lang="scss" scoped>
 .news-card {
   .v-list-item-title {
-    min-height: 50px;
+    min-height: 75px;
+    max-height: 75px;
+    overflow: hidden;
     color: blue;
   }
   .date {
@@ -58,7 +60,7 @@ export default {
     color: grey;
   }
   .v-list-item-subtitle {
-    min-height: 100px;
+    min-height:80px;
   }
 }
 </style>

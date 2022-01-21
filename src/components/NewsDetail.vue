@@ -1,18 +1,18 @@
 <template>
-  <v-card class="mx-auto news-card" outlined>
+  <v-card class="mx-auto news-detail" outlined>
     <v-list-item three-line>
       <v-list-item-content>
-        <div class="text-left mb-2 date" color="grey">
+        <div class="text-left my-2 date" color="grey">
           {{ publishedOn }}
         </div>
-        <v-list-item-title class="text-h5 mb-1 text-wrap text-left">
-          {{ details?.title }} <EditHeadline />
+        <v-list-item-title class="text-h5 mb-4 text-wrap text-left">
+          {{ details?.title }}
         </v-list-item-title>
         <v-list-item-subtitle class="text-wrap text-left">
           {{ details?.description }}
         </v-list-item-subtitle>
 
-        <v-list-item-title class="text-h6 mt-4 text-wrap text-left source">
+        <v-list-item-title class="text-h6 mt-5 text-wrap text-left source">
           Source</v-list-item-title
         >
 
@@ -24,8 +24,9 @@
       <v-list-item-avatar tile size="80" color="grey"></v-list-item-avatar>
     </v-list-item>
 
-    <v-card-actions>
-      <v-btn class="text-right" outlined rounded text> Go Back </v-btn>
+    <v-card-actions class="action-btns">
+      <v-btn @click="goBack" class="text-right" outlined rounded text> Go Back </v-btn>
+      <EditHeadline />
     </v-card-actions>
   </v-card>
 </template>
@@ -33,7 +34,7 @@
 <script>
 import moment from "moment";
 import { mapGetters } from "vuex";
-import EditHeadline from './headline/EditHeadine.vue'
+import EditHeadline from "./headline/EditHeadine.vue";
 
 export default {
   components: {
@@ -58,27 +59,23 @@ export default {
   },
   methods: {
     ...mapGetters(["getNewsById"]),
+    goBack(){
+      this.$router.go(-1)
+    }
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.news-card {
+.news-detail {
+  padding: 2%;
+  .action-btns {
+    display: flex;
+    justify-content: space-around;
+  }
   .v-list-item-title {
-    min-height: 50px;
+    overflow: hidden;
     color: blue;
-    &.source {
-      color: red;
-      font-size: 0.7em;
-    }
   }
-  .date {
-    font-size: 0.8em;
-    color: grey;
-  }
-  .v-list-item-subtitle {
-    min-height: 100px;
-  }
-
 }
 </style>
