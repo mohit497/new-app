@@ -5,7 +5,13 @@ export default createStore({
   state: {
     news: [],
     loading: false,
-    sources:[]
+    sources:[],
+    filters:{
+      source: '',
+    },
+    search:{
+      headline:''
+    }
   },
   mutations: {
     SET_NEWS(state, news) {
@@ -13,6 +19,9 @@ export default createStore({
     },
     SET_SOURCES(state, sources) {
       state.sources = sources;
+    },
+    SET_SEARCH(state, text) {
+      state.search.headline = text;
     },
     SET_LOADING(state, loading) {
       state.loading = loading;
@@ -27,11 +36,11 @@ export default createStore({
     },
   },
   actions: {
-    getNews({ commit }) {
+    getNews({ commit, state }) {
       commit("SET_LOADING", true);
       axios
         .get(
-          `${process.env.VUE_APP_API_ENDPOINT}/top-headlines?country=us&apiKey=${process.env.VUE_APP_API_KEY}`
+          `${process.env.VUE_APP_API_ENDPOINT}/top-headlines?q=${state.search.headline}&country=us&apiKey=${process.env.VUE_APP_API_KEY}`
         )
         .then((response) => {
           commit("SET_NEWS", response.data.articles);
@@ -39,7 +48,7 @@ export default createStore({
         })
         .catch((e) => {
           commit("SET_LOADING", false);
-          console.log(e);
+          console.log(e)
         });
     },
     getSources({ commit }) {
@@ -54,7 +63,7 @@ export default createStore({
         })
         .catch((e) => {
           commit("SET_LOADING", false);
-          console.log(e);
+          console.log(e)
         });
     },
   },

@@ -5,7 +5,13 @@
         <FilterSource />
       </v-col>
       <v-col cols="12" lg="4">
-        <v-text-field label="Search" outlined dense></v-text-field>
+        <v-text-field
+          @change="search"
+          v-model="searchText"
+          label="Search"
+          outlined
+          dense
+        ></v-text-field>
       </v-col>
     </v-row>
   </v-container>
@@ -21,16 +27,22 @@ export default {
   },
   data: () => ({
     items: ["Foo", "Bar", "Fizz", "Buzz"],
-    selected: "",
+    searchText: "",
   }),
   mounted() {
     this.$store.dispatch("getSources");
-    console.log(this.sources);
   },
   computed: {
     ...mapGetters({
       sources: "getAllSources",
     }),
+  },
+  methods: {
+    search() {
+      this.$store.commit("SET_SEARCH", this.searchText);
+      this.dialog = false;
+      this.$store.dispatch("getNews");
+    },
   },
 };
 </script>
