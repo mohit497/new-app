@@ -24,7 +24,8 @@
 
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="primary" text @click="dialog = false"> Save </v-btn>
+          <v-btn color="secondary" text @click="exit"> Exit </v-btn>
+          <v-btn color="primary" text @click="save"> Save </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -42,6 +43,15 @@ export default {
   mounted() {
     //  get the news by id
     this.news = this.$store.getters.getNewsById(this.$route.params.id).pop();
+  },
+  methods: {
+    save() {
+      this.$store.commit("SET_TITLE",{ id: this.$route.params.id, title : this.news.title});
+      this.dialog = false;
+    },
+    exit() {
+      this.dialog = false;
+    },
   },
 };
 </script>
