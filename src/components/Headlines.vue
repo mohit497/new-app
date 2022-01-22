@@ -1,10 +1,17 @@
 
 <template>
   <v-container>
-    <FilterSource />
-
+    <SearchBar />
     <v-row class="text-center my-2">
-      <v-col cols="3" sm="6" lg="3" xs="12" md="4" v-for="(item, index) in news" :key="item.id">
+      <v-col
+        cols="3"
+        sm="6"
+        lg="3"
+        xs="12"
+        md="4"
+        v-for="(item, index) in news"
+        :key="item.id"
+      >
         <NewsCard
           :title="item.title"
           :description="item.description"
@@ -18,14 +25,14 @@
 
 <script>
 import NewsCard from "./NewsCard.vue";
-import FilterSource from "./FilterSource.vue";
+import SearchBar from "./SearchHeader.vue";
 import { mapGetters } from "vuex";
 
 export default {
   name: "HelloWorld",
   components: {
     NewsCard,
-    FilterSource,
+    SearchBar,
   },
   mounted() {
     this.$store.dispatch("getNews");
