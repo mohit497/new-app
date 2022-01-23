@@ -43,7 +43,7 @@ export default {
   computed: {
     ...mapGetters({
       news: "getAllNews",
-      loading: "getLoading",
+            loading: "getLoading",
     }),
   },
   data: () => {

@@ -16,10 +16,11 @@
         </v-list-item-group>
       </v-list>
     </v-row>
-    <v-row>
+
+  </v-container>
+      <v-row>
       <NoRecords :message="NoRecordsText" :show="visited.length === 0" />
     </v-row>
-  </v-container>
 </template>
 
 <script>
@@ -50,6 +51,8 @@ export default {
   background-color: lightgrey;
   margin-top: 1%;
   border: black 1px solid;
+}
+.v-list.v-list--one-line{
   width: 100%;
 }
 </style>
