@@ -6,10 +6,11 @@
       </v-app-bar>
       <div id="nav">
         <router-link to="/">Home</router-link> |
-        <router-link to="/about">About</router-link>
+        <router-link to="/test">History</router-link>
       </div>
       <router-view />
       <Loader />
+      <Error />
     </v-main>
   </v-app>
 </template>
@@ -40,11 +41,13 @@
 <script>
 import { mapGetters } from "vuex";
 import Loader from './components/shared/Loader.vue'
+import Error from './components/shared/Error.vue'
 
 export default {
   name: "App",
   components:{
-    Loader
+    Loader,
+    Error
   },
   computed: {
     ...mapGetters({

@@ -12,7 +12,8 @@ export default createStore({
     search: {
       headline: "",
     },
-    history:[]
+    history:[{title:" heloothis is testing history "}],
+    errors:[]
   },
   mutations: {
     SET_NEWS(state, news) {
@@ -39,7 +40,13 @@ export default createStore({
       });
     },
     ADD_TO_HISTORY(state, index) {
-      state.news = [...state.history, state.news[index]]
+      state.history = [...state.history, state.news[index]]
+    },
+    SET_ERROR(state, error) {
+      state.errors = [...state.errors, error]
+    },
+    CLEAR_ERRORS(state) {
+      state.errors = []
     },
   },
   actions: {
@@ -55,7 +62,7 @@ export default createStore({
         })
         .catch((e) => {
           commit("SET_LOADING", false);
-          console.log(e);
+          commit("SET_ERROR", e);
         });
     },
     getNewsBySource({ commit, state }) {
@@ -70,7 +77,7 @@ export default createStore({
         })
         .catch((e) => {
           commit("SET_LOADING", false);
-          console.log(e);
+          commit("SET_ERROR", e);
         });
     },
     getSources({ commit }) {
@@ -85,9 +92,9 @@ export default createStore({
         })
         .catch((e) => {
           commit("SET_LOADING", false);
-          console.log(e);
+          commit("SET_ERROR", e);
         });
-    },
+    }
   },
   getters: {
     getAllNews: (state) => {
@@ -100,11 +107,13 @@ export default createStore({
       return state.loading;
     },
     getNewsById: (state) => (id) => {
-      console.log(
-        state.news.filter((a, index) => index === Number(id)),
-        id
-      );
       return state.news.filter((a, index) => index === Number(id));
+    },
+    getHistory: (state) => {
+      return state.history
+    },
+    getErrors: (state) => {
+      return state.errors
     },
   },
   modules: {},

@@ -17,10 +17,7 @@ export default {
   props: {
     message: String,
     show: Boolean,
-  },
-  mounted() {
-    console.log("no records called");
-  },
+  }
 };
 </script>
 
