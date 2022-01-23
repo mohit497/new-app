@@ -2,6 +2,8 @@
   <div class="text-center">
     <v-dialog v-model="dialog" width="1000">
       <template v-slot:activator="{ attrs }">
+        <v-icon>fas fa-edit</v-icon>
+
         <v-btn
           color="lighten-2"
           dark
@@ -13,13 +15,17 @@
       </template>
 
       <v-card width="1000">
-        <v-card-title class="text-h5 grey lighten-2">
-          <v-textarea
-            name="input-7-1"
-            v-model="news.title"
-            hint="Hint text"
-          ></v-textarea>
-        </v-card-title>
+        <v-form ref="form" v-model="valid" lazy-validation>
+          <v-card-title class="text-h5 grey lighten-2">
+            <v-textarea
+              required
+              name="input-7-1"
+              v-model="news.title"
+              hint="Hint text"
+              :rules="headingRules"
+            ></v-textarea>
+          </v-card-title>
+        </v-form>
         <v-divider></v-divider>
 
         <v-card-actions>
@@ -37,7 +43,12 @@ export default {
   data() {
     return {
       dialog: false,
+      valid: true,
       news: null,
+      headingRules: [
+        (v) => !!v || "Name is required",
+        (v) => (v && v.length <= 10) || "Name must be less than 10 characters",
+      ],
     };
   },
   mounted() {
@@ -46,7 +57,10 @@ export default {
   },
   methods: {
     save() {
-      this.$store.commit("SET_TITLE",{ id: this.$route.params.id, title : this.news.title});
+      this.$store.commit("SET_TITLE", {
+        id: this.$route.params.id,
+        title: this.news.title,
+      });
       this.dialog = false;
     },
     exit() {

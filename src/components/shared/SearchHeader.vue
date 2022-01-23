@@ -1,17 +1,18 @@
 <template>
   <v-container fluid>
     <v-row align="center">
-      <v-col cols="12" lg="3">
-        <FilterSource />
-      </v-col>
-      <v-col cols="12" lg="4">
+      <v-col cols="12" lg="6" class="text-center">
         <v-text-field
+          class="search-input"
           @change="search"
           v-model="searchText"
-          label="Search"
-          outlined
+          label="Search News"
+          solo
           dense
         ></v-text-field>
+      </v-col>
+      <v-col cols="12" lg="3" offset-lg="2">
+        <FilterSource />
       </v-col>
     </v-row>
   </v-container>
@@ -46,3 +47,10 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.search-input {
+  max-width: 60%;
+  margin: auto;
+}
+</style>

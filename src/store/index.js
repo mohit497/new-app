@@ -5,13 +5,13 @@ export default createStore({
   state: {
     news: [],
     loading: false,
-    sources:[],
-    filters:{
-      source: '',
+    sources: [],
+    filters: {
+      source: "",
     },
-    search:{
-      headline:''
-    }
+    search: {
+      headline: "",
+    },
   },
   mutations: {
     SET_NEWS(state, news) {
@@ -22,6 +22,10 @@ export default createStore({
     },
     SET_SEARCH(state, text) {
       state.search.headline = text;
+    },
+    SET_FILTER(state, source) {
+      console.log('source', source)
+      state.filters.source = source;
     },
     SET_LOADING(state, loading) {
       state.loading = loading;
@@ -48,7 +52,23 @@ export default createStore({
         })
         .catch((e) => {
           commit("SET_LOADING", false);
-          console.log(e)
+          console.log(e);
+        });
+    },
+    getNewsBySource({ commit, state }) {
+      console.log('get news by source')
+      commit("SET_LOADING", true);
+      axios
+        .get(
+          `${process.env.VUE_APP_API_ENDPOINT}/top-headlines?q=${state.search.headline}&sources=${state.filters.source}&apiKey=${process.env.VUE_APP_API_KEY}`
+        )
+        .then((response) => {
+          commit("SET_NEWS", response.data.articles);
+          commit("SET_LOADING", false);
+        })
+        .catch((e) => {
+          commit("SET_LOADING", false);
+          console.log(e);
         });
     },
     getSources({ commit }) {
@@ -63,7 +83,7 @@ export default createStore({
         })
         .catch((e) => {
           commit("SET_LOADING", false);
-          console.log(e)
+          console.log(e);
         });
     },
   },

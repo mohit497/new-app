@@ -9,13 +9,7 @@
         <router-link to="/about">About</router-link>
       </div>
       <router-view />
-      <v-progress-circular
-        v-if="loading"
-        :size="70"
-        :width="7"
-        color="blue"
-        indeterminate
-      ></v-progress-circular>
+      <Loader />
     </v-main>
   </v-app>
 </template>
@@ -45,9 +39,13 @@
 
 <script>
 import { mapGetters } from "vuex";
+import Loader from './components/shared/Loader.vue'
 
 export default {
   name: "App",
+  components:{
+    Loader
+  },
   computed: {
     ...mapGetters({
       loading: "getLoading",

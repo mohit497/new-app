@@ -19,13 +19,15 @@
           :id="index"
         />
       </v-col>
+      <NoRecords :show="news.length === 0 && !loading" :message="message" />
     </v-row>
   </v-container>
 </template>
 
 <script>
 import NewsCard from "./NewsCard.vue";
-import SearchBar from "./SearchHeader.vue";
+import SearchBar from "./shared/SearchHeader.vue";
+import NoRecords from "./shared/NoRecords.vue";
 import { mapGetters } from "vuex";
 
 export default {
@@ -33,6 +35,7 @@ export default {
   components: {
     NewsCard,
     SearchBar,
+    NoRecords,
   },
   mounted() {
     this.$store.dispatch("getNews");
@@ -40,7 +43,13 @@ export default {
   computed: {
     ...mapGetters({
       news: "getAllNews",
+      loading: "getLoading",
     }),
+  },
+  data: () => {
+    return {
+      message: " No Records Found",
+    };
   },
 };
 </script>
