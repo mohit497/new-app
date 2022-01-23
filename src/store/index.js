@@ -24,7 +24,6 @@ export default createStore({
       state.search.headline = text;
     },
     SET_FILTER(state, source) {
-      console.log('source', source)
       state.filters.source = source;
     },
     SET_LOADING(state, loading) {
@@ -56,7 +55,6 @@ export default createStore({
         });
     },
     getNewsBySource({ commit, state }) {
-      console.log('get news by source')
       commit("SET_LOADING", true);
       axios
         .get(
