@@ -25,7 +25,9 @@
     </v-list-item>
 
     <v-card-actions class="action-btns">
-      <v-btn @click="goBack" class="text-right" outlined rounded text> Go Back </v-btn>
+      <v-btn @click="goBack" class="text-right" outlined rounded text>
+        Go Back
+      </v-btn>
       <EditHeadline />
     </v-card-actions>
   </v-card>
@@ -56,12 +58,15 @@ export default {
   mounted() {
     //  get the news by id
     this.details = this.$store.getters.getNewsById(this.$route.params.id).pop();
+
+    // add this news to history
+    this.$store.dispatch("ADD_TO_HISTORY", this.$route.params.id);
   },
   methods: {
     ...mapGetters(["getNewsById"]),
-    goBack(){
-      this.$router.go(-1)
-    }
+    goBack() {
+      this.$router.go(-1);
+    },
   },
 };
 </script>

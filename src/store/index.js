@@ -12,6 +12,7 @@ export default createStore({
     search: {
       headline: "",
     },
+    history:[]
   },
   mutations: {
     SET_NEWS(state, news) {
@@ -36,6 +37,9 @@ export default createStore({
         }
         return a;
       });
+    },
+    ADD_TO_HISTORY(state, index) {
+      state.news = [...state.history, state.news[index]]
     },
   },
   actions: {
