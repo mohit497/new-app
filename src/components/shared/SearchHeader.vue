@@ -27,7 +27,6 @@ export default {
     FilterSource,
   },
   data: () => ({
-    items: ["Foo", "Bar", "Fizz", "Buzz"],
     searchText: "",
   }),
   mounted() {
