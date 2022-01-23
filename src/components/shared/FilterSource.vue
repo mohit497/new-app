@@ -22,7 +22,6 @@ export default {
   },
     methods: {
     filter() {
-      console.log('filter ', this.selected)
       this.$store.commit("SET_FILTER", this.selected);
       this.$store.dispatch("getNewsBySource");
     },

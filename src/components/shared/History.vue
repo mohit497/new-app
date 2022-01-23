@@ -1,11 +1,16 @@
 <template>
-  <v-container v-if="show">
-    <v-row class="text-center my-2">
-      <v-col cols="12" class="my-2" v-for="item in visited" :key="item.title">
-        <v-card class="message" outlined>
-          {{ item.title }}
-        </v-card>
-      </v-col>
+  <v-container>
+    <v-row class="text-left my-2">
+      <v-list shaped>
+        <v-subheader>History</v-subheader>
+        <v-list-item-group v-model="selectedItem" color="primary">
+          <v-list-item @click="visitHistory(item.index)" v-for="(item, i) in visited" :key="i">
+            <v-list-item-content>
+              <v-list-item-title v-text="item.title"></v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
     </v-row>
   </v-container>
 </template>
@@ -18,6 +23,20 @@ export default {
     ...mapGetters({
       visited: "getHistory",
     }),
-  }
+  },
+    methods: {
+    visitHistory(id) {
+      this.$router.push(`/details/${id}`);
+    },
+  },
+
 };
 </script>
+
+<style lang="scss" scoped>
+.v-list-item {
+  background-color: lightgrey;
+  margin-top: 1%;
+  border: black 1px solid;
+}
+</style>

@@ -60,7 +60,7 @@ export default {
     color: grey;
   }
   .v-list-item-subtitle {
-    min-height:80px;
+    min-height: 80px;
   }
 }
 </style>

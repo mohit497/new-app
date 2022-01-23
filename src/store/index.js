@@ -12,8 +12,8 @@ export default createStore({
     search: {
       headline: "",
     },
-    history:[{title:" heloothis is testing history "}],
-    errors:[]
+    history: [],
+    errors: [],
   },
   mutations: {
     SET_NEWS(state, news) {
@@ -39,14 +39,15 @@ export default createStore({
         return a;
       });
     },
-    ADD_TO_HISTORY(state, index) {
-      state.history = [...state.history, state.news[index]]
+    SET_HISTORY(state, index) {
+      const news = state.news[index];
+      state.history = [...state.history, { title: news.title, index: index}];
     },
     SET_ERROR(state, error) {
-      state.errors = [...state.errors, error]
+      state.errors = [...state.errors, error];
     },
     CLEAR_ERRORS(state) {
-      state.errors = []
+      state.errors = [];
     },
   },
   actions: {
@@ -94,7 +95,7 @@ export default createStore({
           commit("SET_LOADING", false);
           commit("SET_ERROR", e);
         });
-    }
+    },
   },
   getters: {
     getAllNews: (state) => {
@@ -110,10 +111,10 @@ export default createStore({
       return state.news.filter((a, index) => index === Number(id));
     },
     getHistory: (state) => {
-      return state.history
+      return state.history;
     },
     getErrors: (state) => {
-      return state.errors
+      return state.errors;
     },
   },
   modules: {},

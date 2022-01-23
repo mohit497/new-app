@@ -70,7 +70,7 @@ export default {
     save() {
       this.$store.commit("SET_TITLE", {
         id: this.$route.params.id,
-        title: this.news.title,
+        title: this.news.title
       });
       this.dialog = false;
     },

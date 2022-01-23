@@ -60,7 +60,7 @@ export default {
     this.details = this.$store.getters.getNewsById(this.$route.params.id).pop();
 
     // add this news to history
-    this.$store.dispatch("ADD_TO_HISTORY", this.$route.params.id);
+    this.$store.commit("SET_HISTORY", this.$route.params.id);
   },
   methods: {
     ...mapGetters(["getNewsById"]),
