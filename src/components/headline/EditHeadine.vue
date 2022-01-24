@@ -56,10 +56,6 @@ export default {
       dialog: false,
       valid: true,
       news: null,
-      headingRules: [
-        (v) => !!v || "Name is required",
-        (v) => (v && v.length <= 10) || "Name must be less than 10 characters",
-      ],
     };
   },
   mounted() {
